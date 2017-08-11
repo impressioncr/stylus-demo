@@ -1,0 +1,34 @@
+//function
+.exam6
+  add(a,b)
+    a + b
+
+  sizes = 10px 20px 30px
+
+  size()
+    15px 10px
+
+  .example1
+    padding: add(10px, 5)
+  .example2
+    font-size:sizes[0]
+  .example3
+    font-size:size()[0]
+
+  compare(a,b)
+    if a > b
+      higher
+    else if a < b
+      lower
+    else
+      equal
+  .example4
+    width:compare(10,9)
+  .example5
+    //invoke可以接受一个函数为参数,a,b传给fn()
+    invoke(a,b,fn)
+      fn(a,b)
+    sub(a,b)
+      a - b
+    padding-top:invoke(15px,10px,sub)
+//关键字参数
