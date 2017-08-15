@@ -1,3 +1,74 @@
+.exam1
+  position: absolute
+  top: 50%
+  left: 50%
+  width: 150px
+  height: 80px
+  margin-left:-(@width / 2)
+  margin-top:-(@height / 2)
+
+positions()
+  position:arguments
+  z-index:1 unless @z-index
+
+.exam2
+  .example1
+    positions:absolute
+    z-index:20
+  .example2
+    positions:absolute
+//插值 使用{}字符包围表达式来插入值
+.exam3
+  vendor(prop, args)
+    -webkit-{prop}:args
+    -moz-{prop}:args
+    {prop}:args
+  .example1
+    vendor('border-radius', 2px)
+  table
+    for row in 1 2 3 4 5
+      tr:nth-child({row})
+        height:10px * row
+//运算符
+
+//mixins
+.exam4
+  border-radius(n)
+    -webkit-border-raduis:n
+    -moz-border-raduis:n
+    border-raduis:n
+  form input
+    border-radius: 5px
+
+stripe(even = #fff, odd = #eee)
+ tr
+  background-color odd
+  &.even
+  &:nth-child(even)
+    background-color even
+
+table
+  stripe()
+  td
+    padding 4px 10px
+
+table#users
+  stripe(#303030, #494848)
+  td
+    color white
+
+inline-list()
+  li
+    display:inline
+comma-list()
+  inline-list()
+  li
+    &:after
+      content:','
+    &:last-child:after
+      content:''
+ul
+  comma-list()
 //function
 .exam6
   add(a,b)
@@ -31,4 +102,51 @@
     sub(a,b)
       a - b
     padding-top:invoke(15px,10px,sub)
-//关键字参数
+//内置方法
+.exam7
+  nums = 1 2
+  push(nums, 3, 4, 5)
+  //=>nums 1, 2, 3, 4, 5
+  unshift(nums, 3, 2, 1)
+  //=>nums 1, 2, 3, 4, 5
+  pairs = (one 1) (two 2) (three 3)
+  keys(pairs)
+  //=> one two three
+  values(pairs)
+  //=>1 2 3
+  abs(-5px)
+  //=>5px
+  min(1,5)
+  max(1,5)
+  even(6px)
+  add(5mm)
+  sum(1 2 4)
+  join(' ', 1 2 3)
+  //=>'1 2 3'
+  //image-size(img)
+  //=>返回图片的宽高
+//rest params
+.exam8
+  box-shadow(args...)
+    -webkit-box-shadow: args
+    -moz-box-shadow: args
+//条件
+.exam9
+  overload-padding = true
+  if overload-padding
+    padding(y,x)
+      margin y x
+  .example1
+    padding: 5px 10px
+//迭代
+.exam10
+  .example
+    for num in 1 2 3
+      foo: num
+//@extend
+//@css
+@css {
+  .exam12 {
+    font: 14px;
+  }
+}
